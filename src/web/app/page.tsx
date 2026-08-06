@@ -1,9 +1,11 @@
 import { getTasks, createTask, toggleTask } from './actions';
 import { greeting } from './greeting';
+import { tagline } from './tagline';
 
 export default async function Home() {
   const tasks = await getTasks();
   const greetingMessage = greeting('User');
+  const taglineMessage = tagline();
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 py-16 px-4">
@@ -12,6 +14,7 @@ export default async function Home() {
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-8">
           To-Do List
         </h1>
+        <p className="text-sm text-zinc-500 dark:text-zinc-500 mb-8">{taglineMessage}</p>
 
         {/* Add task form */}
         <form action={createTask} className="flex gap-2 mb-8">
