@@ -72,3 +72,7 @@ Commands explicitly rejected include:
 - No shell metacharacters like `$()` or backticks in command execution
 - No ability to modify system files or directories
 - Limited to the allowlisted command set
+
+## Notes
+
+The clone's remote URL contains no actual authentication token despite the `x-access-token` prefix in the URL.
