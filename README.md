@@ -66,6 +66,10 @@ The API is not exposed directly, but you can reach it through the web container 
 | POST | `/tasks` | Create a task (`{ "title": "..." }`) |
 | PATCH | `/tasks/:id` | Update a task (`{ "completed": true }` or `{ "title": "..." }`) |
 
+### Rate limiting
+
+The API implements simple in-memory rate limiting: each client IP is limited to **60 requests per minute**. When the limit is exceeded, the API returns HTTP 429 (Too Many Requests) with a JSON error response. Rate limit information is included in response headers (`X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`).
+
 ## Project structure
 
 ```
@@ -73,6 +77,7 @@ src/
 ├── api/            # Express REST API
 │   ├── index.js    # Route handlers
 │   ├── db.js       # PostgreSQL connection pool
+│   ├── rateLimit.js # Rate limiting middleware
 │   └── Dockerfile
 ├── db/             # Database migrations
 │   ├── migrations/ # node-pg-migrate migration files

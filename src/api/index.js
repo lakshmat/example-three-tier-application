@@ -1,10 +1,14 @@
 const express = require('express');
 const db = require('./db');
+const rateLimit = require('./rateLimit');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
+
+// Apply rate limiting to all routes
+app.use(rateLimit);
 
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
