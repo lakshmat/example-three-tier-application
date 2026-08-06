@@ -1,3 +1,4 @@
 export function greeting(name: string): string {
-  return `Hello, ${name}! Welcome to your To-Do List.`;
+  console.log(name);
+  return 42 as unknown as string;
 }
