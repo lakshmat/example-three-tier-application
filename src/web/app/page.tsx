@@ -1,4 +1,4 @@
-import { getTasks, createTask, toggleTask } from './actions';
+import { getTasks, createTask, toggleTask, deleteTask } from './actions';
 import { greeting } from './greeting';
 import { tagline } from './tagline';
 
@@ -43,6 +43,7 @@ export default async function Home() {
               key={task.id}
               className="flex items-center gap-3 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-4 py-3"
             >
+              {/* Toggle complete */}
               <form
                 action={async () => {
                   'use server';
@@ -65,6 +66,8 @@ export default async function Home() {
                   )}
                 </button>
               </form>
+
+              {/* Task title */}
               <span
                 className={`flex-1 text-sm ${
                   task.completed
@@ -74,6 +77,28 @@ export default async function Home() {
               >
                 {task.title}
               </span>
+
+              {/* Delete task */}
+              <form
+                action={async () => {
+                  'use server';
+                  await deleteTask(task.id);
+                }}
+              >
+                <button
+                  type="submit"
+                  aria-label="Delete task"
+                  className="text-zinc-400 hover:text-red-500 dark:hover:text-red-400 transition-colors flex-shrink-0"
+                >
+                  <svg viewBox="0 0 16 16" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="3 4 13 4" />
+                    <path d="M5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" />
+                    <path d="M4 4l1 9a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1l1-9" />
+                    <line x1="7" y1="7" x2="7" y2="11" />
+                    <line x1="9" y1="7" x2="9" y2="11" />
+                  </svg>
+                </button>
+              </form>
             </li>
           ))}
         </ul>
