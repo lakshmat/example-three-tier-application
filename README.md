@@ -65,6 +65,8 @@ The API is not exposed directly, but you can reach it through the web container 
 | GET | `/tasks` | List all tasks |
 | POST | `/tasks` | Create a task (`{ "title": "..." }`) |
 | PATCH | `/tasks/:id` | Update a task (`{ "completed": true }` or `{ "title": "..." }`) |
+| DELETE | `/tasks/:id` | Delete a task |
+| GET | `/api/stats/summary` | Count of each core resource (`{ "users": N, "tasks": N }`) |
 
 ## Project structure
 
