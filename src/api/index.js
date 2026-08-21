@@ -59,6 +59,16 @@ app.delete('/tasks/:id', async (req, res) => {
   res.status(204).end();
 });
 
+// GET /api/stats/summary — return total count of each core resource type
+app.get('/api/stats/summary', async (_req, res) => {
+  const { rows: usersRows } = await db.query('SELECT COUNT(*) AS count FROM users');
+  const { rows: tasksRows } = await db.query('SELECT COUNT(*) AS count FROM tasks');
+  res.json({
+    users: parseInt(usersRows[0].count, 10),
+    tasks: parseInt(tasksRows[0].count, 10),
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`API listening on port ${PORT}`);
 });
